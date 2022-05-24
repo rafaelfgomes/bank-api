@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    volumes: 
+      - db:/var/lib/mysql:delegated
+    container_name: bank-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_USER_PASSWD}"
+    ports:
+      - "${DB_PORT}:3306"
+    networks:
+      net:
+        ipv4_address: 172.80.0.2
+
+  php:
+    volumes: 
+      - ./api:/var/www/html
+    image: bank-php
+    container_name: bank-php
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    depends_on:
+      - "db"
+    networks:
+      net:
+
+  ws:
+    volumes: 
+      - ./api:/var/www/html
+    container_name: bank-ws
+    build: 
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - "${API_HTTP_PORT}:80"
+    depends_on:
+      - "php"
+    networks:
+      net:
+
+networks:
+  net:
+
+volumes:
+  db:
