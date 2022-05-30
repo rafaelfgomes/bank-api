@@ -16,11 +16,11 @@ class AccountTransferResource extends JsonResource
     {
         return [
             'origin' => [
-                'id' => $this['origin']['account_id'],
+                'id' => (string) $this['origin']['account_id'],
                 'balance' => $this['origin']['balance']
             ],
             'destination' => [
-                'id' => $this['destination']['account_id'],
+                'id' => (string) $this['destination']['account_id'],
                 'balance' => $this['destination']['balance']
             ],
         ];

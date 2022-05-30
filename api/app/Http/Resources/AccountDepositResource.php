@@ -16,7 +16,7 @@ class AccountDepositResource extends JsonResource
     {
         return [
             'destination' => [
-                'id' => $this['account_id'],
+                'id' => (string) $this['account_id'],
                 'balance' => $this['balance']
             ]
         ];

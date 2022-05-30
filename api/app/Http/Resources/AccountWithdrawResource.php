@@ -17,7 +17,7 @@ class AccountWithdrawResource extends JsonResource
         if (!empty($this->resource)) {
             return [
                 'origin' => [
-                    'id' => $this['account_id'],
+                    'id' => (string) $this['account_id'],
                     'balance' => $this['balance']
                 ]
             ];

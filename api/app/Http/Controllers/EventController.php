@@ -23,6 +23,8 @@ class EventController extends Controller
             case EventType::DEPOSIT:
                 try {
                     $response = new AccountDepositResource($depositController->deposit($request->all()));
+                } catch (NotFoundHttpException $e) {
+                    return new JsonResponse(0, Response::HTTP_NOT_FOUND);
                 } catch (\Exception $e) {
                     return new JsonResponse([ 'error' => $e->getMessage() ], Response::HTTP_BAD_REQUEST);
                 }

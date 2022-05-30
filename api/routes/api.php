@@ -21,6 +21,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('reset', ResetController::class);
-Route::get('balance', BalanceController::class);
-Route::post('event', EventController::class);
+// Route::post('reset', ResetController::class);
+// Route::get('balance', BalanceController::class);
+// Route::post('event', EventController::class);
